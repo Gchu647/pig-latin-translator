@@ -1,22 +1,44 @@
 let pigLatinTransaltor = (function() {
   let newStr = "";
 
-  let vowelFirst = function (str) {
-    let firstLetter = str.charAt(0).toLowerCase();
+  let toPigLatin = function (str) {
+    let strArr = str.split("");
+    console.log("entered string: ", str);
+    console.log("string array", strArr)
     //Guard against numbers
-    
-    if(firstLetter === "a" || firstLetter === "e" || firstLetter === "i" || firstLetter === "o" || firstLetter === "u") {
-      newStr = str + "-ay"
+    for (let i = 0; i < strArr.length; i++) {
+      console.log("index: ", i);
+      if(strArr[0] === "a" || strArr[0] === "e" || strArr[0] === "i" || strArr[0] === "o" || strArr[0] === "u") {
+        newStr = str + "-ay"
+        
+        console.log(newStr);
+        return newStr;
+      } else if (strArr[i] === "a" || strArr[i] === "e" || strArr[i] === "i" || strArr[i] === "o" || strArr[i] === "u") {
+        leftPart = strArr.slice(i).join("");
+        rightPart = "-" + strArr.slice(0,i).join("") + "ay";
+        newStr = leftPart + rightPart;
 
-      return newStr;
-    } else { // Working on consanants
+        console.log(newStr);
+        return newStr;
+      }
     }
   }
 
+  let toEnglish = function(str) {
+    let index = str.indexOf("-");
+    let leftPart = str.slice(0, index);
+    let rightPart = str.slice(index);
+
+    console.log(leftPart);
+    console.log(rightPart);
+  }
+
   return {
-    vowelFirst: vowelFirst
+    toPigLatin: toPigLatin,
+    toEnglish: toEnglish
   }
 }) ();
 
-let result = pigLatinTransaltor.vowelFirst("li");
-console.log(result);
+// pigLatinTransaltor.toPigLatin("eat");
+// pigLatinTransaltor.toPigLatin("trash");
+pigLatinTransaltor.toEnglish("ash-tray");
