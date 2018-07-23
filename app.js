@@ -28,9 +28,17 @@ let pigLatinTransaltor = (function() {
     let index = str.indexOf("-");
     let leftPart = str.slice(0, index);
     let rightPart = str.slice(index);
+    let indexOfR = rightPart.indexOf("ay"); // If this is -1, stop function
 
-    console.log(leftPart);
-    console.log(rightPart);
+    if(indexOfR < 0) {
+      console.log("Error: This is not Pig Latin")
+    } else if(indexOfR === 1) {
+      console.log(leftPart);
+    } else {
+      let consonant = rightPart.slice(1,indexOfR);
+      console.log(consonant + leftPart);
+    }
+
   }
 
   return {
@@ -39,6 +47,8 @@ let pigLatinTransaltor = (function() {
   }
 }) ();
 
-// pigLatinTransaltor.toPigLatin("eat");
-// pigLatinTransaltor.toPigLatin("trash");
+pigLatinTransaltor.toPigLatin("eat");
+pigLatinTransaltor.toPigLatin("trash");
 pigLatinTransaltor.toEnglish("ash-tray");
+pigLatinTransaltor.toEnglish("eat-ay");
+pigLatinTransaltor.toEnglish("happy");
